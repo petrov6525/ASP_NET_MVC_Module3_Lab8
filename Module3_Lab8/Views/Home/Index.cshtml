@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    
+}
+
+<style>
+    .box{
+        display:flex;
+        column-gap:50px;
+    }
+
+    .center{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .size-40{
+        font-size:40px;
+    }
+
+    .fraction-box{
+        display:flex;
+        align-items:center;
+        column-gap:5px;
+    }
+</style>
+
+
+@{
+    Fraction? fract1 = ViewBag.fract1;
+    Fraction? fract2 = ViewBag.fract2;
+
+    <form asp-action="Result" method="post">
+        <div class="box">
+            <div>
+                <div>
+                    <input type="number" min="1" max="10" name="num1" value="@fract1?.numerator" />
+                </div>
+                <hr />
+                <div>
+                    <input type="number" min="1" max="10" name="denum1" value="@fract1?.denumerator" />
+                </div>
+            </div>
+
+            <div class="center">
+                <select name="operation">
+                    <option value="plus" selected>Сложение</option>
+                    <option value="minus">Вычетание</option>
+                    <option value="mult">Умножение</option>
+                    <option value="div">Деление</option>
+                    <option value="red">Сокращение</option>
+                </select>
+            </div>
+
+            <div>
+                <div>
+                    <input type="number" min="1" max="10" name="num2" value="@fract2?.numerator" />
+                </div>
+                <hr />
+                <div>
+                    <input type="number" min="1" max="10" name="denum2" value="@fract2?.denumerator" />
+                </div>
+            </div>
+
+            <div class="center">
+                <input class="form-control" type="submit" value="Результат" />
+            </div>
+
+            @if (ViewBag.result != null)
+            {
+                var result = ViewBag.result;
+                @if (result.numerator == result.denumerator)
+                {
+                    <div class="center size-40">
+                        1
+                    </div>
+                }
+                else if (result.numerator == 0)
+                {
+                    @if (ViewBag.fullPart != null)
+                    {
+                        <div class="center size-40">
+                            @ViewBag.fullPart
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="center size-40">
+                            0
+                        </div>
+                    }
+                    
+                }
+                else
+                {
+                    <div class="fraction-box">
+                        @if (result.numerator < 0)
+                        {
+                            <div class="center size-40">
+                                -
+                            </div>
+                        }
+                        @if (ViewBag.fullPart != null)
+                        {
+                            <div class="center size-40">
+                                @Math.Abs(ViewBag.fullPart)
+                            </div>
+                        }
+                        <div>
+                            <div>
+                                @Math.Abs(result.numerator)
+                            </div>
+                            <hr />
+                            <div>
+                                @result.denumerator
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+            }
+        </div>
+    </form>
+}
+

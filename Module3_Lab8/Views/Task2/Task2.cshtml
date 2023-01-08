@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var car = ViewBag.car;
+}
+
+<style>
+    .flex{
+        display:flex;
+        align-items:baseline;
+        column-gap:1em;
+    }
+    .gap-100{
+        column-gap:100px;
+    }
+
+    a{
+        text-decoration:none;
+    }
+</style>
+
+
+
+
+
+<div class="flex gap-100">
+    <h1>Car info:</h1>
+    <a asp-action="ChangeCar"><button class="form-control">Change Car</button></a>
+</div>
+
+
+<div class="flex">
+    <h3>Manufacture:</h3>
+    <p>@car?.Manufacture</p>
+</div>
+
+
+<div class="flex">
+    <h3>Name:</h3>
+    <p>@car?.Name</p>
+</div>
+
+<div class="flex">
+    <h3>Color:</h3>
+    <p>@car?.Color</p>
+</div>
+
+<div class="flex">
+    <h3>Year:</h3>
+    <p>@car?.Year</p>
+</div>
+
+<div class="flex">
+    <h3>Volume:</h3>
+    <p>@car?.Volume L</p>
+</div>
